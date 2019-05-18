@@ -5,16 +5,40 @@ public class MAPAnalyser {
 		float[] map = new float[10];
 		for(int i=0; i< sbp.length;i++)
 		{
-
 			map[i]=(float) (1.0/3.0*sbp[i]+2/3.0*dbp[i]);
-
 		}
-
 		validateMap(map[index]);
-		System.out.println("Systolic Blood Pressure: "+sbp[index]);
-		System.out.println("Diastolic Blood Pressure: "+dbp[index]);
+		System.out.println("Systolic Blood Pressure (in mmHg) : "+sbp[index]);
+		System.out.println("Diastolic Blood Pressure (in mmHg) : "+dbp[index]);
 		System.out.println("Mean Arterial Pressure : "+map[index]);
 		System.out.println("Cateogry :"+ validateMap(map[index]));
+	}
+	
+	public static void mapResult(int[] sbp, int[] dbp,int minIndex,int maxIndex) {
+		float[] map = new float[10];
+		for(int i=0; i< sbp.length;i++)
+		{
+			map[i]=(float) (1.0/3.0*sbp[i]+2/3.0*dbp[i]);
+		}
+		validateMap(map[minIndex]);
+		while(minIndex <= maxIndex)
+		{
+			System.out.println("Systolic Blood Pressure (in mmHg) : "+sbp[minIndex]);
+			System.out.println("Diastolic Blood Pressure (in mmHg): "+dbp[minIndex]);
+			System.out.println("Mean Arterial Pressure: "+map[minIndex]);
+			System.out.println("Cateogry :"+ validateMap(map[minIndex]));
+			System.out.println("=====================================");
+			minIndex++;
+		}
+	}
+	
+	public static boolean checkIfExist(String[] myStringArray, String stringToLocate) {
+		for (String element : myStringArray) {
+			if (element.equals(stringToLocate)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public static String validateMap(float mapVal) {

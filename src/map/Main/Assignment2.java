@@ -3,6 +3,7 @@ package map.Main;
 import java.util.Scanner;
 
 import map.MAPAnalyser.MAPAnalyser;
+import map.View.View;
 
 public class Assignment2 {
 
@@ -11,10 +12,10 @@ public class Assignment2 {
 		String personIdentifier[] = new String[10];
 		personIdentifier[0]="A001";
 		personIdentifier[1]="A002";
-		personIdentifier[2]="A003";
+		personIdentifier[2]="A003"; //
 		personIdentifier[3]="A004";
 		personIdentifier[4]="A005";
-		personIdentifier[5]="A006";
+		personIdentifier[5]="A006";//
 		personIdentifier[6]="A007";
 		personIdentifier[7]="A008";
 		personIdentifier[8]="A009";
@@ -63,10 +64,7 @@ public class Assignment2 {
 		
 		char option;
 		Scanner scanner = new Scanner(System.in);
-    	System.out.print("1. Display the record for a specified person. \n");
-    	System.out.print("2. Display records for all persons with MAP values within a specified range. \n");
-    	System.out.print("3. Display the minimum, maximum and median MAP values. \n");
-    	System.out.print("0. Exit the application \n");
+    	View.mainMenu();
     	    while(true) {
     	    	option = scanner.next().charAt(0);
     	        switch(option) {
@@ -77,7 +75,8 @@ public class Assignment2 {
     	        		if (found) {
     	        			int getindex = MAPAnalyser.findIndex(personIdentifier, stringToLocate);
     	        			System.out.println("This is valid input ! \n");
-    	        			System.out.println("Index : " + getindex);
+    	        			System.out.println("Report");
+    	        			System.out.println("S.No : " + getindex);
     	        			System.out.println("Person identifier Report: "+personIdentifier[getindex]);
     	        			if (getindex >= 0) {
     	        				MAPAnalyser.mapResults(systolicBloodPressure, diastolicBloodPressure,getindex);
@@ -85,11 +84,64 @@ public class Assignment2 {
     	        		} else {
     	        			System.out.println("This is invalid input ! \n");
     	        		}
-    	        		System.out.print("Finished Report");
+    	        		System.out.print(" Report Finished ! \n");
+    	        		System.out.println("Press 1 : For Main Menu");
+    	        		System.out.println("Press 0 : For Exit Application \n");
+    	        		int option2 = scanner.nextInt();
+    	        		switch(option2) {
+    	        		case 1:
+    	        			if(option2==1) {
+    	        				View.mainMenu();
+    	        			} 
+    	        		break;
+    	        		case 0:
+    	        			return;
+    	        		}
+    	        		
     	                break; 
-    	                
     	            case '2':
-    	            	System.out.print("Work in progress");
+    	            	System.out.println("Please Enter Person Identifier's Range \n");
+    	            	System.out.print("Please enter FROM person identifier: \n");
+    	        		String minStringToLocate = scanner.next();
+    	        		System.out.print("Please enter TO person identifier: \n");
+    	        		String maxStringToLocate = scanner.next();
+    	        		try{
+    	        			if(maxStringToLocate.compareTo(minStringToLocate)<=0)
+    	        			{
+    	        				throw new Exception("Invalid entry, please enter correct value");
+    	        			}
+    	        		}
+    	        		catch(Exception ex)
+    	        		{
+    	        			System.out.println("Invalid Entry! Please enter the values again");
+    	        			return;
+    	        		}
+    	        		if (MAPAnalyser.checkIfExist(personIdentifier, minStringToLocate) && MAPAnalyser.checkIfExist(personIdentifier, maxStringToLocate)) {
+    	        			int minIndex = MAPAnalyser.findIndex(personIdentifier, minStringToLocate);
+    	        			int maxIndex = MAPAnalyser.findIndex(personIdentifier, maxStringToLocate);
+    	        			System.out.println("This is valid input ! \n");
+    	        			//System.out.println("Identified : " + getindex);
+    	        			if (minIndex >= 0 && maxIndex >0) {
+    	        				MAPAnalyser.mapResult(systolicBloodPressure, diastolicBloodPressure,minIndex,maxIndex);
+    	        			}
+    	        		} else {
+    	        			System.out.println("This is invalid input ! \n");
+    	        		}
+    	        		System.out.print(" Report Finished ! \n");
+    	        		System.out.println("Press 1 : For Main Menu");
+    	        		System.out.println("Press 0 : For Exit Application \n");
+    	        		int option3 = scanner.nextInt();
+    	        		switch(option3) {
+    	        		case 1:
+    	        			if(option3==1) {
+    	        				View.mainMenu();
+    	        			} 
+    	        		break;
+    	        		case 0:
+    	        			return;
+    	        		
+    	        		}
+    	        		
     	                break;
     	            case '3':
     	            	System.out.print("Work in progress");
